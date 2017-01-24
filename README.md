@@ -16,37 +16,37 @@ installable via Yum, and docker.
 
 ### Installation Instructions
 
-To install the prerequisites run:
+1. To install the prerequisites run:
 
-```
-sudo yum install -y docker createrepo_c
-```
+  ```
+  sudo yum install -y docker createrepo_c
+  ```
 
-To startup docker run:
+2. Start the docker subsystem:
 
-```
-sudo systemctl start docker
-```
+  ```
+  sudo systemctl start docker
+  ```
 
-To add your userid to the dockerroot group run:
+3. Add your user to the dockerroot group run:
 
-```
-sudo usermod -aG dockerroot USER
-```
+  ```
+  sudo usermod -aG dockerroot USER
+  ```
 
 ## Building docker image
 
-First create the "src" directory and place your RPMs in it:
+1. Create the "src" directory and place your RPMs in it:
 
-```
-make src
-```
+  ```
+  make src
+  ```
 
-The Makefile will build the image with the command:
+2. Build the image with the command:
 
-```
-make build
-```
+  ```
+  make build
+  ```
 
 This will output something like the following:
 
@@ -108,30 +108,29 @@ Successfully built 18ade366bec4
 
 ## Running docker image
 
-You can now look at your docker images:
+1. You can now look at your docker images:
 
-```
-[user@centos docker-yumrepo]$ docker images
-REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
-docker-yumrepo            latest              18ade366bec4        5 seconds ago       338.4 MB
-docker.io/centos          latest              67591570dd29        5 weeks ago         191.8 MB
-docker.io/coreos/apache   latest              5a3024d885c8        2 years ago         294.4 MB
-```
+  ```
+  [user@centos docker-yumrepo]$ docker images
+  REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+  docker-yumrepo            latest              18ade366bec4        5 seconds ago       338.4 MB
+  docker.io/centos          latest              67591570dd29        5 weeks ago         191.8 MB
+  ```
 
-To run the container use the command:
+2. To run the container use the command:
 
-```
-make run
-```
+  ```
+  make run
+  ```
 This will show something like:
 
-```
-[user@centos docker-yumrepo]$ make run
-docker run -d -p 80:80 docker-yumrepo
-056e4ecb22a5e56ecb430b4c16ce1c07e50e97d75944130e3c9d1099aa323a05
-```
+  ```
+  [user@centos docker-yumrepo]$ make run
+  docker run -d -p 80:80 docker-yumrepo
+  056e4ecb22a5e56ecb430b4c16ce1c07e50e97d75944130e3c9d1099aa323a05
+  ```
 
-You can verify whether the yum repository is functioning with curl such as:
+3. You can verify whether the yum repository is functioning using  the curl command such as:
 
 ```
 [user@centos docker-yumrepo]$ curl http://localhost/docker-yumrepo/repomd.xml
