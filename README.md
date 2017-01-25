@@ -130,7 +130,9 @@ This will show something like:
   056e4ecb22a5e56ecb430b4c16ce1c07e50e97d75944130e3c9d1099aa323a05
   ```
 
-3. You can verify whether the yum repository is functioning using  the curl command such as:
+## Installing from Yum repo on docker container
+
+1. You can verify whether the yum repository is functioning using  the curl command such as:
 
   ```
   [user@centos docker-yumrepo]$ curl http://localhost/docker-yumrepo/repomd.xml
@@ -146,7 +148,7 @@ This will show something like:
       <open-size>21763</open-size>
   ...
   ```
-4. Create a yum repository config file such as:
+2. Create a yum repository config file such as:
 
   ```
   [user@centos docker-yumrepo]$ cat /etc/yum.repos.d/docker-yumrepo.repo
@@ -157,7 +159,7 @@ This will show something like:
   gpgcheck=0
   ```
 
-5. Yum repolist will now show the repository:
+3. Yum repolist will now show the repository:
 
   ```
   [user@centos docker-yumrepo]$ yum repolist
@@ -172,7 +174,7 @@ This will show something like:
   docker-yumrepo                               docker-yumrepo                                                            6
   ```
 
-6. You can get info about the packages that you added to the repository now:
+4. You can get info about the packages that you added to the repository now:
   ```
   [user@centos docker-yumrepo]$ yum info qemu-kvm-ev
   Loaded plugins: fastestmirror
@@ -190,7 +192,7 @@ This will show something like:
   Size        : 2.4 M
   Repo        : docker-yumrepo
   ```
-7. And install the packages:
+5. And install the packages:
 
   ```
   [user@centos docker-yumrepo]$ sudo yum install qemu-kvm-ev
