@@ -8,7 +8,7 @@ WORKDIR workdir
 
 RUN ["yum", "install", "-y", "httpd"]
 
-COPY workdir/* /var/www/html/docker-yumrepo/
+COPY workdir/ /var/www/html/docker-yumrepo/
 COPY docker-yumrepo.conf /etc/httpd/conf.d/
 
 CMD ["-D", "FOREGROUND"]
