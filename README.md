@@ -132,20 +132,64 @@ This will show something like:
 
 3. You can verify whether the yum repository is functioning using  the curl command such as:
 
-```
-[user@centos docker-yumrepo]$ curl http://localhost/docker-yumrepo/repomd.xml
-<?xml version="1.0" encoding="UTF-8"?>
-<repomd xmlns="http://linux.duke.edu/metadata/repo" xmlns:rpm="http://linux.duke.edu/metadata/rpm">
-  <revision>1485293260</revision>
-  <data type="primary">
-    <checksum type="sha256">54f8d9392c540b33f63d035971d7914cf4fbfda74f8d30d9b741e7f0945dd239</checksum>
-    <open-checksum type="sha256">2c8de840440531ca630e236ed486b659251f6b7bf9ab05cc916c268278335ea8</open-checksum>
-    <location href="repodata/54f8d9392c540b33f63d035971d7914cf4fbfda74f8d30d9b741e7f0945dd239-primary.xml.gz"/>
-    <timestamp>1485293260</timestamp>
-    <size>3120</size>
-    <open-size>21763</open-size>
-...
-```
+  ```
+  [user@centos docker-yumrepo]$ curl http://localhost/docker-yumrepo/repomd.xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <repomd xmlns="http://linux.duke.edu/metadata/repo" xmlns:rpm="http://linux.duke.edu/metadata/rpm">
+    <revision>1485293260</revision>
+    <data type="primary">
+      <checksum type="sha256">54f8d9392c540b33f63d035971d7914cf4fbfda74f8d30d9b741e7f0945dd239</checksum>
+      <open-checksum type="sha256">2c8de840440531ca630e236ed486b659251f6b7bf9ab05cc916c268278335ea8</open-checksum>
+      <location href="repodata/54f8d9392c540b33f63d035971d7914cf4fbfda74f8d30d9b741e7f0945dd239-primary.xml.gz"/>
+      <timestamp>1485293260</timestamp>
+      <size>3120</size>
+      <open-size>21763</open-size>
+  ...
+  ```
+4. Create a yum repository config file such as:
+
+  ```
+  [user@centos docker-yumrepo]$ cat /etc/yum.repos.d/docker-yumrepo.repo
+  [docker-yumrepo]
+  name=docker-yumrepo
+  baseurl=http://localhost/docker-yumrepo
+  enabled=1
+  gpgcheck=0
+  ```
+
+5. Yum repolist will now show the repository:
+
+  ```
+  [user@centos docker-yumrepo]$ yum repolist
+  Loaded plugins: fastestmirror
+  Loading mirror speeds from cached hostfile
+   * base: mirror.net.cen.ct.gov
+   * epel: dl.fedoraproject.org
+   * extras: mirror.lug.udel.edu
+   * updates: mirrors.advancedhosters.com
+  repo id                                      repo name                                                            status
+  base/7/x86_64                                CentOS-7 - Base                                                       9,363
+  docker-yumrepo                               docker-yumrepo                                                            6
+  ```
+
+6. You can install the packages that you added to the repository now:
+  ```
+  [user@centos docker-yumrepo]$ yum info qemu-kvm-ev
+  Loaded plugins: fastestmirror
+  Loading mirror speeds from cached hostfile
+   * base: mirror.net.cen.ct.gov
+   * epel: dl.fedoraproject.org
+   * extras: mirrors.lga7.us.voxel.net
+   * updates: mirrors.advancedhosters.com
+  Available Packages
+  Name        : qemu-kvm-ev
+  Arch        : x86_64
+  Epoch       : 10
+  Version     : 2.6.0
+  Release     : 27.1.el7
+  Size        : 2.4 M
+  Repo        : docker-yumrepo
+  ```
 
 ## Authors
 
