@@ -14,6 +14,21 @@ installable via Yum, and docker.
 * docker
 * createrepo_c
 
+### Port considerations
+
+If you don't want to this to run on localhost port 80, change the Makefile line:
+
+  ```
+    docker run -d -p 80:80 docker-yumrepo
+  ```
+
+You will need to change the first 80 to the preferred localhost port, such
+as 8888, as in:
+
+  ```
+    docker run -d -p 8888:80 docker-yumrepo
+  ```
+
 ### Installation Instructions
 
 1. To install the prerequisites run:
