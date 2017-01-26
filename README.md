@@ -150,7 +150,7 @@ This will show something like:
 1. You can verify whether the yum repository is functioning using  the curl command such as:
 
   ```
-  [user@centos docker-yumrepo]$ curl http://localhost/docker-yumrepo/repomd.xml
+  [user@centos docker-yumrepo]$ curl http://localhost/docker-yumrepo/repodata/repomd.xml
   <?xml version="1.0" encoding="UTF-8"?>
   <repomd xmlns="http://linux.duke.edu/metadata/repo" xmlns:rpm="http://linux.duke.edu/metadata/rpm">
     <revision>1485293260</revision>
